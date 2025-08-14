@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MM Creative Studio - Your Memories, Restored to Perfection</title>
+    
+    <!-- External Libraries -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+    
+
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        #header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-logo h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: -5px;
+        }
+
+        .nav-logo span {
+            font-size: 0.9rem;
+            color: #e74c3c;
+            font-weight: 300;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #e74c3c;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .cta-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/hero-bg.jpg') center/cover;
+                        background-attachment: fixed;
+            z-index: -2;
+            animation: gradientShift 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes gradientShift {
+            0% { background: linear-gradient(135deg, #2c3e50, #e74c3c); }
+            100% { background: linear-gradient(135deg, #e74c3c, #8e44ad); }
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            color: white;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s ease forwards 0.5s;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s ease forwards 0.8s;
+        }
+
+        .hero-buttons {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s ease forwards 1.1s;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            border-color: #e74c3c;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #333;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about {
+            background: #f8f9fa;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .about-image {
+    background: url('https://i.imgur.com/iebRQxj.jpeg') center/cover;
+    height: 400px;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.about-image::before {
+    display: none;
+}
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .why-choose-us {
+            margin-top: 40px;
+        }
+
+        .why-choose-us h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 25px;
+        }
+
+        .why-choose-us ul {
+            list-style: none;
+        }
+
+        .why-choose-us li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .why-choose-us li:hover {
+            transform: translateX(10px);
+        }
+
+        .why-choose-us li i {
+            font-size: 1.3rem;
+            color: #e74c3c;
+            margin-right: 15px;
+            width: 30px;
+        }
+
+        /* Services Section */
+        .services-tabs {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 2px solid #e74c3c;
+            color: #e74c3c;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background: #e74c3c;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 40px 30px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: #e74c3c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(360deg);
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Printing Categories */
+        .printing-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .category {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .category:hover {
+            transform: translateY(-5px);
+        }
+
+        .category h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .category-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .category-items span {
+            background: #f8f9fa;
+            color: #555;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .category-items span:hover {
+            background: #e74c3c;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background: #f8f9fa;
+        }
+
+        .gallery-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .gallery-tab {
+            background: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .gallery-tab.active,
+        .gallery-tab:hover {
+            background: #e74c3c;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            background: white;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #e74c3c;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .testimonials h3 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 40px;
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial p {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .client strong {
+            color: #e74c3c;
+            font-size: 1.1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .contact .section-header h2,
+        .contact .section-header p {
+            color: white;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: #e74c3c;
+            margin-right: 20px;
+            margin-top: 5px;
+            width: 30px;
+        }
+
+        .contact-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .contact-item p {
+            color: #bdc3c7;
+        }
+
+        .contact-item a {
+            color: #e74c3c;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: #c0392b;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #bdc3c7;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #e74c3c;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+
+        .form-group select option {
+            background: #2c3e50;
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a252f;
+            color: #bdc3c7;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo p {
+            color: #e74c3c;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #e74c3c;
+        }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            width: 20px;
+            color: #e74c3c;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #34495e;
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: rgba(255, 255, 255, 0.95);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                backdrop-filter: blur(10px);
+                padding: 20px 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .printing-categories {
+                grid-template-columns: 1fr;
+            }
+
+            .tab-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 12px 20px;
+                margin: 5px;
+                display: block;
+                text-align: center;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .contact-form {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h2>MM Creative Studio</h2>
+                    <span>Pixel Perfect Creativity</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About Us</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="nav-cta">
+                    <a href="tel:+919949409711" class="cta-btn">
+                        <i class="fas fa-phone"></i> Call Now
+                    </a>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Your Memories, Restored to Perfection</h1>
+            <p class="hero-subtitle">We bring faded, torn, and damaged photographs back to life with precision, care, and artistry.</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn btn-primary">Start Your Restoration</a>
+                <a href="#gallery" class="btn btn-secondary">See Before & After</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>About MM Creative Studio</h2>
+                <p>Preserving memories with 15+ years of expertise</p>
+            </div>
+            <div class="about-content">
+                <div class="about-image" data-aos="fade-right">
+                    <!-- Placeholder for about image -->
+                </div>
+                <div class="about-text" data-aos="fade-left">
+                    <p>Every photo tells a story — a wedding day, a childhood smile, a family gathering frozen in time. But time can fade, scratch, and damage those priceless memories.</p>
+                    
+                    <p>At MM Creative Studio, we have been restoring photographs for over 15 years, mastering both classic retouching methods and modern digital enhancements.</p>
+                    
+                    <p>Whether it's repairing a century-old family portrait or colorizing a black-and-white snapshot, our mission is to preserve the emotions and moments that matter most to you.</p>
+                    
+                    <div class="why-choose-us">
+                        <h3>Why Choose Us</h3>
+                        <ul>
+                            <li data-aos="fade-up" data-aos-delay="100">
+                                <i class="fas fa-award"></i>
+                                <span>15+ Years of Proven Experience</span>
+                            </li>
+                            <li data-aos="fade-up" data-aos-delay="200">
+                                <i class="fas fa-palette"></i>
+                                <span>Blend of Art & Technology</span>
+                            </li>
+                            <li data-aos="fade-up" data-aos-delay="300">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Secure, Confidential Handling</span>
+                            </li>
+                            <li data-aos="fade-up" data-aos-delay="400">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Satisfaction Guaranteed</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Our Services</h2>
+                <p>Complete photo restoration and corporate printing solutions</p>
+            </div>
+            
+            <div class="services-tabs">
+                <div class="tab-buttons" data-aos="fade-up">
+                    <button class="tab-btn active" data-tab="restoration">Photo Restoration</button>
+                    <button class="tab-btn" data-tab="printing">Corporate Printing</button>
+                </div>
+                
+                <div class="tab-content">
+                    <!-- Photo Restoration Services -->
+                    <div class="tab-panel active" id="restoration">
+                        <div class="services-grid">
+                            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                                <div class="service-icon">
+                                    <i class="fas fa-magic"></i>
+                                </div>
+                                <h3>Photo Restoration</h3>
+                                <p>Repair creases, tears, and water damage to bring your precious memories back to life.</p>
+                            </div>
+                            
+                            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                                <div class="service-icon">
+                                    <i class="fas fa-paint-brush"></i>
+                                </div>
+                                <h3>Colorization</h3>
+                                <p>Add natural, vibrant colors to black-and-white photographs with historical accuracy.</p>
+                            </div>
+                            
+                            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                                <div class="service-icon">
+                                    <i class="fas fa-edit"></i>
+                                </div>
+                                <h3>Digital Retouching</h3>
+                                <p>Remove blemishes and imperfections while preserving the authentic character of your photos.</p>
+                            </div>
+                            
+                            <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                                <div class="service-icon">
+                                    <i class="fas fa-puzzle-piece"></i>
+                                </div>
+                                <h3>Photo Reconstruction</h3>
+                                <p>Recreate missing sections of old photos using advanced digital restoration techniques.</p>
+                            </div>
+                            
+                            <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+                                <div class="service-icon">
+                                    <i class="fas fa-archive"></i>
+                                </div>
+                                <h3>Archival Printing</h3>
+                                <p>Preserve your restored images in museum-grade quality for future generations.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Corporate Printing Services -->
+                    <div class="tab-panel" id="printing">
+                        <div class="printing-categories">
+                            <div class="category" data-aos="fade-up" data-aos-delay="100">
+                                <h3>Business Stationery</h3>
+                                <div class="category-items">
+                                    <span>Letterheads</span>
+                                    <span>Envelopes</span>
+                                    <span>Business Cards</span>
+                                    <span>Notepads</span>
+                                    <span>Corporate Folders</span>
+                                </div>
+                            </div>
+                            
+                            <div class="category" data-aos="fade-up" data-aos-delay="200">
+                                <h3>Corporate Printing Solutions</h3>
+                                <div class="category-items">
+                                    <span>ID Cards & Lanyards</span>
+                                    <span>Certificates & Badges</span>
+                                    <span>Annual Reports</span>
+                                    <span>Company Profiles</span>
+                                    <span>Office Branding Materials</span>
+                                </div>
+                            </div>
+                            
+                            <div class="category" data-aos="fade-up" data-aos-delay="300">
+                                <h3>Marketing & Promotional</h3>
+                                <div class="category-items">
+                                    <span>Flex Banners</span>
+                                    <span>Vinyl Boards</span>
+                                    <span>Posters & Flyers</span>
+                                    <span>Event Backdrops</span>
+                                    <span>Standee Displays</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Before & After Gallery</h2>
+                <p>See the magic of restoration in action</p>
+            </div>
+            
+            <div class="gallery-tabs">
+                <button class="gallery-tab active" data-filter="all">All</button>
+                <button class="gallery-tab" data-filter="restoration">Restoration</button>
+                <button class="gallery-tab" data-filter="colorization">Colorization</button>
+                <button class="gallery-tab" data-filter="printing">Printing</button>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item restoration" style="background: url('https://i.imgur.com/njEMnrN.jpeg') center/cover;">
+</div>
+                
+                <div class="gallery-item colorization" data-aos="fade-up" data-aos-delay="200">
+                    🎨
+                </div>
+                
+                <div class="gallery-item printing" data-aos="fade-up" data-aos-delay="300">
+                    🖨️
+                </div>
+                
+                <div class="gallery-item restoration" data-aos="fade-up" data-aos-delay="400">
+                    ✨
+                </div>
+                
+                <div class="gallery-item colorization" data-aos="fade-up" data-aos-delay="500">
+                    🌈
+                </div>
+                
+                <div class="gallery-item printing" data-aos="fade-up" data-aos-delay="600">
+                    📄
+                </div>
+            </div>
+            
+            <!-- Testimonials -->
+            <div class="testimonials" data-aos="fade-up">
+                <h3>What Our Clients Say</h3>
+                <div class="swiper testimonial-slider">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="testimonial">
+                                <p>"They didn't just fix my photos, they brought my memories back to life."</p>
+                                <div class="client">
+                                    <strong>Kavita S.</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="testimonial">
+                                <p>"A perfect blend of technical skill and emotional understanding. Highly recommended."</p>
+                                <div class="client">
+                                    <strong>Ramesh K.</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Get Your Photo Restored Today</h2>
+                <p>Ready to bring your memories back to life? Contact us now!</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info" data-aos="fade-right">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Visit Our Studio</h3>
+                            <p>RR Nagar, Bowenpally, Secunderabad<br>Hyderabad - 500011</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Call Us</h3>
+                            <p><a href="tel:+919949409711">+91-994940911</a></p>
+                            <p><a href="tel:+919394481163">+91-9394481163</a> (WhatsApp)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email Us</h3>
+                            <p><a href="mailto:restore@mmreatives.com">restore@mmreatives.com</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-globe"></i>
+                        <div>
+                            <h3>Website</h3>
+                            <p><a href="http://www.mmreatives.com" target="_blank">www.mmreatives.com</a></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form" data-aos="fade-left">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" name="phone" placeholder="Your Phone">
+                        </div>
+                        <div class="form-group">
+                            <select name="service" required>
+                                <option value="">Select Service</option>
+                                <option value="restoration">Photo Restoration</option>
+                                <option value="colorization">Colorization</option>
+                                <option value="retouching">Digital Retouching</option>
+                                <option value="reconstruction">Photo Reconstruction</option>
+                                <option value="printing">Corporate Printing</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" placeholder="Tell us about your project" rows="5"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h3>MM Creative Studio</h3>
+                        <p>Pixel Perfect Creativity</p>
+                    </div>
+                    <p>Preserving memories with 15+ years of expertise in photo restoration and corporate printing solutions.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li>Photo Restoration</li>
+                        <li>Colorization</li>
+                        <li>Digital Retouching</li>
+                        <li>Corporate Printing</li>
+                        <li>Business Stationery</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +91-994940911</p>
+                        <p><i class="fas fa-envelope"></i> restore@mmreatives.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Hyderabad - 500011</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 MM Creative Studio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+    
+    <script>
+        // Initialize GSAP
+        gsap.registerPlugin(ScrollTrigger);
+
+        // DOM Content Loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS
+            AOS.init({
+                duration: 1000,
+                once: true,
+                offset: 100
+            });
+
+            // Initialize components
+            initNavigation();
+            initHeroAnimations();
+            initScrollAnimations();
+            initServiceTabs();
+            initGallery();
+            initTestimonials();
+            initContactForm();
+        });
+
+        // Navigation Functions
+        function initNavigation() {
+            const header = document.getElementById('header');
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            // Sticky header on scroll
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile menu toggle
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Smooth scrolling for navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        const headerHeight = header.offsetHeight;
+                        const targetPosition = targetSection.offsetTop - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+
+                        // Close mobile menu
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    }
+                });
+            });
+        }
+
+        // Hero Section Animations
+        function initHeroAnimations() {
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+
+            // Scroll indicator click
+            scrollIndicator.addEventListener('click', () => {
+                document.querySelector('#about').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Hero buttons smooth scroll
+            document.querySelectorAll('.hero-buttons .btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = btn.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        const headerHeight = document.getElementById('header').offsetHeight;
+                        const targetPosition = targetSection.offsetTop - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Scroll Animations
+        function initScrollAnimations() {
+            // Service cards animation
+            gsap.from('.service-card', {
+                opacity: 0,
+                y: 30,
+                stagger: 0.2,
+                duration: 0.8,
+                scrollTrigger: {
+                    trigger: '.services-grid',
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+
+            // Gallery items animation
+            gsap.from('.gallery-item', {
+                opacity: 0,
+                scale: 0.8,
+                stagger: 0.1,
+                duration: 0.6,
+                scrollTrigger: {
+                    trigger: '.gallery-grid',
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+        }
+
+        // Service Tabs
+        function initServiceTabs() {
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabPanels = document.querySelectorAll('.tab-panel');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetTab = button.getAttribute('data-tab');
+
+                    // Remove active class from all buttons and panels
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabPanels.forEach(panel => panel.classList.remove('active'));
+
+                    // Add active class to clicked button and corresponding panel
+                    button.classList.add('active');
+                    document.getElementById(targetTab).classList.add('active');
+
+                    // Re-trigger AOS for new content
+                    setTimeout(() => {
+                        AOS.refresh();
+                    }, 100);
+                });
+            });
+        }
+
+        // Gallery Functions
+        function initGallery() {
+            const galleryTabs = document.querySelectorAll('.gallery-tab');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            // Gallery filter tabs
+            galleryTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const filter = tab.getAttribute('data-filter');
+
+                    // Update active tab
+                    galleryTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    // Filter gallery items
+                    galleryItems.forEach(item => {
+                        if (filter === 'all' || item.classList.contains(filter)) {
+                            item.style.display = 'flex';
+                            gsap.from(item, { opacity: 0, scale: 0.8, duration: 0.5 });
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+
+        // Testimonials Slider
+        function initTestimonials() {
+            if (typeof Swiper !== 'undefined') {
+                new Swiper('.testimonial-slider', {
+                    loop: true,
+                    autoplay: {
+                        delay: 5000,
+                        disableOnInteraction: false
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true
+                    },
+                    effect: 'fade',
+                    fadeEffect: {
+                        crossFade: true
+                    },
+                    speed: 800
+                });
+            }
+        }
+
+        // Contact Form
+        function initContactForm() {
+            const form = document.getElementById('contactForm');
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                // Show loading state
+                submitBtn.innerHTML = 'Sending...';
+                submitBtn.disabled = true;
+                
+                // Simulate form submission
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Show success message
+                alert('Thank you! Your message has been sent successfully. We\'ll get back to you soon.');
+                form.reset();
+                
+                // Reset button
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+            });
+        }
+    </script>
+</body>
+</html>
